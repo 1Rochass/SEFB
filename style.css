@@ -1,0 +1,28 @@
+#modalBox {
+
+    
+    background: #fff;
+    display: none;
+    height: 600px;
+    position: absolute;
+    min-width: 600px;
+    border: 3px solid gray;
+    border-radius: 10px;
+    
+}
+.modalBox-recipientEmail {
+	width: 100px;
+}
+.modalBox-productTitle {
+
+}
+.modalBox-productPrice {
+
+}
+.modalBox-productImage img{
+	height: 100px;
+	width: 100px;
+}
+.modalBox-productContent {
+
+}

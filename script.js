@@ -25,6 +25,7 @@ jQuery( document ).ready(function(){ // есть разные варианты �
 
 	// Show products from categories
 	jQuery('#categories').on("click", ".category", function(){
+		// Get id
 		var idCategory = jQuery(this).attr('id');
 		
 		var data = {
@@ -36,4 +37,60 @@ jQuery( document ).ready(function(){ // есть разные варианты �
 			jQuery('#products').html(response);
 		});
 	});
+
+	// SEFB
+	jQuery('#products').on("click", ".SEFB", function(){
+		
+		var productId = jQuery(this).attr('id');
+
+		var data = {
+			action: 'SEFBaction',
+			productId: productId,
+		}
+
+		jQuery.post(ajaxurl, data, function(response){
+			jQuery('#modalBox').html(response);
+		});
+
+		jQuery('#modalBox').show();
+
+	});
+	// Clode modal box
+	jQuery('#modalBox').on("click", ".modalBox-close", function(){
+		jQuery('#modalBox').html('');
+		jQuery('#modalBox').css('display', 'none');
+	});
+	// Send email
+	jQuery('#modalBox').on("click", ".modalBox-productSend", function(){
+	// Recipient email
+		var recipientEmail = jQuery('.modalBox-recipientEmail').val();
+	// Product title
+		var productTitle = jQuery('.modalBox-productTitle').text();
+	// Product price
+		var productPrice = jQuery('.modalBox-productPrice').text();
+	// Product images
+		// !!! Create array 
+		var productImages = []; 
+		// !!! index is a main proper part in this code
+		jQuery('.modalBox-productImage img').each(function(index){
+			productImages[index] = jQuery(this).attr('src'); 
+		});
+	// Product content
+		var productContent = jQuery('.modalBox-productContent').text();
+		
+		var data = {
+			action: 'sendEmail',
+			recipientEmail: recipientEmail,
+			productTitle: productTitle,
+			productPrice: productPrice,
+			productContent: productContent,
+			productImages: productImages,
+		}
+
+		jQuery.post(ajaxurl, data, function(response){
+			jQuery('#modalBox').html(response);
+		});
+
+	});
+
 });
